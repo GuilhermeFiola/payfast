@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html ng-app="app">
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    	<script src="../public/js/pagamentosController.js"></script>
+    </head>
+    <body>
+        <div ng-controller="pagamentosController">
+			<table>
+                <tr>
+                    <th>ID</th>
+                    <th>Forma Pagamento</th>
+                    <th>Valor</th>
+                    <th>Moeda</th>
+                    <th>Data Pagamento</th>
+                    <th>Descrição</th>
+                </tr>
+                <tr ng-repeat="var pagamento in pagamentos">
+                    <td>{{pagamento.id}}</td>
+                </tr>
+            </table>
+		</div>
+    </body>
+</html>
