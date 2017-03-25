@@ -1,7 +1,36 @@
 module.exports = function(app){
     app.get("/pagamentos", function(req, res){
+        var connection = app.persistencia.connectionFactory();
+        var pagamentoDao = new app.persistencia.pagamentoDao(connection);
+        
+        pagamentoDao.lista(function(exception, result){
+            if(exception){
+                res.status(500).json(exception);
+            }else{
+                res.status(201).json(result);
+            }
+        });
+
         console.log("Requisição recebida em /pagamentos");
-        res.send("GET");
+        connection.end();
+    });
+
+    app.get("/pagamentos/pagamento/:id", function(req, res){
+        var connection = app.persistencia.connectionFactory();
+        var pagamentoDao = new app.persistencia.pagamentoDao(connection);
+
+        var id = req.params.id;
+        
+        pagamentoDao.buscaPorId(id, function(exception, result){
+            if(exception){
+                res.status(500).json(exception);
+            }else{
+                res.status(201).json(result);
+            }
+        });
+
+        console.log("Requisição recebida em /pagamentos/pagamento/" + id);
+        connection.end();
     });
 
     app.post("/pagamentos/pagamento", function(req, res){
@@ -35,6 +64,8 @@ module.exports = function(app){
 
             res.status(201).json(pagamento);
         });
+
+        connection.end();
     });
 }
 

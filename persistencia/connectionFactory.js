@@ -4,7 +4,7 @@ function createDBConnection(){
     return mysql.createConnection({
         host: 'localhost',
         user: 'root',
-        password: 'admin',
+        password: '123',
         database: 'payfast'
     });
 }
